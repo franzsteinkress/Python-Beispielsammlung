@@ -13,7 +13,7 @@ build/
 *.whl
 
 # Virtuelle Umgebung
-venv/
+.venv/
 .env
 
 # VS Code-Einstellungen
@@ -37,3 +37,4 @@ Thumbs.db
 
 # Projekt-spezifische Ignorierungen
 doc/
+data/*

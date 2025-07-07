@@ -13,7 +13,7 @@ build/
 *.whl
 
 # Virtuelle Umgebung
-venv/
+.venv/
 .env
 
 # VS Code-Einstellungen

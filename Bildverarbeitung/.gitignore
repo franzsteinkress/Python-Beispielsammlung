@@ -13,7 +13,7 @@ build/
 *.whl
 
 # Virtuelle Umgebung
-venv/
+.venv/
 .env
 
 # VS Code-Einstellungen
@@ -32,7 +32,7 @@ Thumbs.db
 *.key
 
 # Verarbeitete Bilddateien
-*.jpg
+#*.jpg
 *.jpeg
 *.png
 
