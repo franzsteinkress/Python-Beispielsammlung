@@ -1,0 +1,66 @@
+/* Copyright (c) 2025 Franz Steinkress
+   Licensed under the MIT License - see LICENSE for details */
+
+/* styles.css */
+/* Benutzerdefinierte Stile für die Blog-Anwendung */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-title a {
+    color: #2D74B2;
+    text-decoration: underline;
+    transition: color 0.3s ease; /* Sanfter Übergang beim Hover */
+}
+.card-title a:hover {
+    color: #5A6268;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background-color: #2D74B2;
+    border-color: #2D74B2;
+    transition: filter 0.3s ease; /* Sanfter Übergang beim Hover */
+}
+
+.btn-primary:hover {
+    background-color: #5A6268;
+    border-color: #5A6268;
+    filter: brightness(1);
+}
+
+.navbar-custom {
+    background-color: #2D74B2;
+}
+.navbar-brand img {
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.navbar-brand {
+    color: #FFFFFF;
+    transition: color 0.3s ease; /* Sanfter Übergang beim Hover */
+}
+.navbar-brand:hover {
+    color: #E0E0E0;
+    text-decoration: underline;
+}
+.nav-link {
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Sanfter Übergang beim Hover */
+}
+.nav-link:hover {
+    color: #E0E0E0;
+    text-decoration: none; /* Kein Unterstrich, falls gewünscht */
+}
+
+.alert {
+    border-radius: 5px;
+}

@@ -1,0 +1,152 @@
+<!-- Copyright (c) 2025 Franz Steinkress
+     Licensed under the MIT License - see LICENSE for details -->
+
+<script type="text/javascript">
+    // Variable, die angibt, ob es sich um eine XLSX-Datei handelt
+    var gk_isXlsx = false;
+    // Lookup-Objekt für XLSX-Dateien
+    var gk_xlsxFileLookup = {};
+    // Objekt zum Speichern der Dateidaten
+    var gk_fileData = {};
+
+    // Funktion prüft, ob eine Zelle gefüllt ist (nicht leer und nicht null)
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+
+    // Funktion lädt die Daten einer Datei und verarbeitet sie
+    function loadFileData(filename) {
+        // Prüft, ob es sich um eine XLSX-Datei handelt und ob die Datei im Lookup vorhanden ist
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                // Liest die XLSX-Datei mit base64-Daten
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                // Holt den Namen des ersten Arbeitsblatts
+                var firstSheetName = workbook.SheetNames[0];
+                // Holt das erste Arbeitsblatt
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Konvertiert das Arbeitsblatt in JSON, um leere Zeilen zu filtern
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filtert leere Zeilen heraus (Zeilen, in denen alle Zellen leer, null oder undefined sind)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristik, um die Kopfzeile zu finden, indem Zeilen mit weniger gefüllten Zellen als die nächste Zeile ignoriert werden
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback, falls keine Kopfzeile gefunden wird oder der Index zu hoch ist
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                    headerRowIndex = 0;
+                }
+
+                // Konvertiert die gefilterten JSON-Daten zurück in CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Erstellt ein neues Arbeitsblatt aus dem gefilterten Array
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                // Fehler in der Konsole ausgeben
+                console.error(e);
+                return "";
+            }
+        }
+        // Gibt die Dateidaten zurück, falls keine XLSX-Verarbeitung nötig ist
+        return gk_fileData[filename] || "";
+    }
+</script>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #2D74B2;
+            color: #FFFFFF;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        h1 img {
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        #chatbox {
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #E0E0E0;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+        #userInput {
+            width: 80%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 5px 15px;
+            background-color: #2D74B2;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #4A4A4A;
+        }
+        #response {
+            margin-top: 20px;
+            word-wrap: break-word;
+            width: 80%;
+            text-align: left;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <img src="{{ url_for('static', filename='icons/fs.ico') }}" alt="Chatbot Icon">
+        Einfacher Chatbot Simulator
+    </h1>
+    <div id="chatbox">
+        <input type="text" id="userInput" placeholder="Nachricht eingeben...">
+        <button onclick="sendMessage()">Senden</button>
+        <div id="response"></div>
+    </div>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("userInput").value;
+            if (input) {
+                fetch(`/get?msg=${encodeURIComponent(input)}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("response").innerText = data;
+                        document.getElementById("userInput").value = "";
+                    });
+            }
+        }
+        document.getElementById("userInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>

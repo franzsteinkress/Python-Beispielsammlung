@@ -1,0 +1,44 @@
+/* styles.css */
+body {
+    background-color: #F5F5F5;
+    color: #333;
+}
+
+h1 {
+    color: #2D74B2;
+}
+
+.card {
+    background-color: #FFFFFF;
+    border-color: #2D74B2;
+}
+
+.btn-primary {
+    background-color: #2D74B2;
+    border-color: #2D74B2;
+}
+
+.btn-primary:hover {
+    background-color: #1F4F8C; /* Dunkleres Blau */
+    border-color: #1F4F8C;
+}
+
+.btn-secondary {
+    background-color: #6C757D;
+}
+
+.btn-secondary:hover {
+    background-color: #5A6268;
+}
+
+.table {
+    background-color: #FFFFFF;
+}
+
+#fehler_meldung {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}

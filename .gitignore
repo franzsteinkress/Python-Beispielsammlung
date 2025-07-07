@@ -1,0 +1,35 @@
+# Python-spezifische Ignorierungen
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtuelle Umgebung
+venv/
+.env
+
+# VS Code-Einstellungen
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+
+# Betriebssystem-spezifische Dateien
+.DS_Store
+Thumbs.db
+*.swp
+
+# Sensible Dateien
+*.env
+*.secret
+*.key
+
+# Projekt-spezifische Ignorierungen
+doc/

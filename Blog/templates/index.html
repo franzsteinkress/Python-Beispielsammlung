@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    // Variable, die angibt, ob es sich um eine XLSX-Datei handelt
+    var gk_isXlsx = false;
+    // Lookup-Objekt für XLSX-Dateien
+    var gk_xlsxFileLookup = {};
+    // Objekt zum Speichern der Dateidaten
+    var gk_fileData = {};
+
+    // Funktion prüft, ob eine Zelle gefüllt ist (nicht leer und nicht null)
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+
+    // Funktion lädt die Daten einer Datei und verarbeitet sie
+    function loadFileData(filename) {
+        // Prüft, ob es sich um eine XLSX-Datei handelt und ob die Datei im Lookup vorhanden ist
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                // Liest die XLSX-Datei mit base64-Daten
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                // Holt den Namen des ersten Arbeitsblatts
+                var firstSheetName = workbook.SheetNames[0];
+                // Holt das erste Arbeitsblatt
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Konvertiert das Arbeitsblatt in JSON, um leere Zeilen zu filtern
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filtert leere Zeilen heraus (Zeilen, in denen alle Zellen leer, null oder undefined sind)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristik, um die Kopfzeile zu finden, indem Zeilen mit weniger gefüllten Zellen als die nächste Zeile ignoriert werden
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback, falls keine Kopfzeile gefunden wird oder der Index zu hoch ist
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                    headerRowIndex = 0;
+                }
+
+                // Konvertiert die gefilterten JSON-Daten zurück in CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Erstellt ein neues Arbeitsblatt aus dem gefilterten Array
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                // Fehler in der Konsole ausgeben
+                console.error(e);
+                return "";
+            }
+        }
+        // Gibt die Dateidaten zurück, falls keine XLSX-Verarbeitung nötig ist
+        return gk_fileData[filename] || "";
+    }
+</script>
+{% extends "base.html" %}
+{% block title %}Startseite{% endblock %}
+{% block content %}
+<h1>Blog-Posts</h1>
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title"><a href="{{ url_for('render_post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p class="card-text text-muted">Erstellt am {{ post.created }}</p>
+        <p class="card-text">{{ post.content|truncate(200) }}</p>
+        <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-primary">Bearbeiten</a>
+        <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Sicher löschen?');">Löschen</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<p>Keine Posts vorhanden.</p>
+{% endfor %}
+{% endblock %}
