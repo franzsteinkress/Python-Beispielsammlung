@@ -20,16 +20,17 @@ class ConfirmationApp:
         # Stil für ttk-Widgets
         self.theme_style = ttk.Style()
         self.theme_style.theme_use("classic")
-        self.theme_style.configure("Custom.TButton", background='#40E0D0', bordercolor='#0000FF', borderwidth=2)
-        self.theme_style.map("Custom.TButton", background=[('active', '#40E0D0')])
-        self.main_window.configure(bg="turquoise")
+        self.theme_style.configure("Custom.TButton", background='#2D74B2', bordercolor='#2D74B2', borderwidth=2)
+        self.theme_style.map("Custom.TButton", background=[('active', '#2D74B2')])
+        self.main_window.configure(bg="#2D74B2")
         self.main_window.iconbitmap('resources/fs.ico')
 
         # Label im Hauptfenster
         info_label = tk.Label(
             master=self.main_window,
             text="Drücken öffnet einen nicht modalen Dialog",
-            bg="turquoise",
+            bg="#2D74B2",
+            fg="white",
             font="Arial 12"
         )
         info_label.pack(pady=40)
@@ -56,7 +57,7 @@ class ConfirmationApp:
         dialog_window = tk.Toplevel(self.main_window)
         dialog_window.title("Bestätigung")
         dialog_window.geometry("300x150")
-        dialog_window.configure(bg="turquoise")
+        dialog_window.configure(bg="#2D74B2")
         dialog_window.iconbitmap('resources/fs.ico')
         self._center_window(dialog_window)
         
@@ -65,13 +66,13 @@ class ConfirmationApp:
             master=dialog_window,
             text="Möchten Sie gerne fortfahren?",
             fg="white",
-            bg="turquoise",
+            bg="#2D74B2",
             font="Arial 12"
         )
         info_label.pack(pady=20)
         
         # Frame für Buttons
-        button_frame = tk.Frame(dialog_window, bg="turquoise")
+        button_frame = tk.Frame(dialog_window, bg="#2D74B2")
         button_frame.pack(pady=10)
         
         # Bestätigungs-Button

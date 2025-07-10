@@ -16,6 +16,7 @@ class DialogWindow(tk.Frame):
         self.master = master
         self.master.title("Eingabedialog")
         self.master.geometry("300x100")
+        self.master.configure(bg="#2D74B2")
         self.master.iconbitmap('resources/fs.ico')
         self._center_window(self.master)
         

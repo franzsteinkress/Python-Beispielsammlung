@@ -16,6 +16,7 @@ class Finanzdatenanzeige:
         self.haupt_fenster = haupt_fenster
         self.haupt_fenster.title("Finanzdatenanzeige")
         self.haupt_fenster.iconbitmap('resources/fs.ico')
+        self.haupt_fenster.configure(bg="#2D74B2")
 
         self.csv_datei_pfad = ""
         
@@ -33,7 +34,7 @@ class Finanzdatenanzeige:
         self.erstelle_menue()
         
         # Hauptframe
-        self.haupt_frame = tk.Frame(self.haupt_fenster)
+        self.haupt_frame = tk.Frame(self.haupt_fenster, bg="#2D74B2")
         self.haupt_frame.pack(expand=True, fill="both", padx=10, pady=10)
         
         # Button zum Öffnen der Datei
@@ -44,28 +45,36 @@ class Finanzdatenanzeige:
             font="Arial 12"
         ).pack(pady=10)
         
-        # Tabelle für Datenanzeige
-        self.daten_tabelle = ttk.Treeview(self.haupt_frame, show="headings")
-        self.daten_tabelle.pack(expand=True, fill="both", side=tk.LEFT)
-        
-        # Vertikale Scrollleiste
+        # Frame für Tabelle + Scrollbars
+        tabelle_frame = ttk.Frame(self.haupt_frame)
+        tabelle_frame.pack(expand=True, fill="both")
+
+        # Treeview (Tabelle)
+        self.daten_tabelle = ttk.Treeview(tabelle_frame, show="headings")
+        self.daten_tabelle.grid(row=0, column=0, sticky="nsew")
+
+        # Vertikale Scrollbar
         vertikale_scrollleiste = ttk.Scrollbar(
-            self.haupt_frame,
-            orient="vertical",
-            command=self.daten_tabelle.yview
+            tabelle_frame, orient="vertical", command=self.daten_tabelle.yview
         )
-        vertikale_scrollleiste.pack(side=tk.RIGHT, fill="y")
-        self.daten_tabelle.configure(yscrollcommand=vertikale_scrollleiste.set)
-        
-        # Horizontale Scrollleiste
+        vertikale_scrollleiste.grid(row=0, column=1, sticky="ns")
+
+        # Horizontale Scrollbar
         horizontale_scrollleiste = ttk.Scrollbar(
-            self.haupt_frame,
-            orient="horizontal",
-            command=self.daten_tabelle.xview
+            tabelle_frame, orient="horizontal", command=self.daten_tabelle.xview
         )
-        horizontale_scrollleiste.pack(side=tk.BOTTOM, fill="x")
-        self.daten_tabelle.configure(xscrollcommand=horizontale_scrollleiste.set)
-    
+        horizontale_scrollleiste.grid(row=1, column=0, sticky="ew")
+
+        # Scrollbar-Verknüpfung
+        self.daten_tabelle.configure(
+            yscrollcommand=vertikale_scrollleiste.set,
+            xscrollcommand=horizontale_scrollleiste.set
+        )
+
+        # Grid-Konfiguration für tabelle_frame
+        tabelle_frame.rowconfigure(0, weight=1)
+        tabelle_frame.columnconfigure(0, weight=1)
+
     def erstelle_menue(self):
         """Erstellt die Menüleiste. Fügt Datei- und Hilfe-Menüs hinzu."""
         menue_leiste = tk.Menu(self.haupt_fenster)

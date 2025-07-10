@@ -158,16 +158,16 @@ class Funktionsdialog:
         tool_window = tk.Toplevel(self.main_window)
         tool_window.title("Digitale Uhr")
         tool_window.iconbitmap('resources/fs.ico')
-        tool_window.geometry("300x150")
+        tool_window.geometry("300x130")
         tool_window.resizable(False, False)
-        tool_window.configure(bg="white")
+        tool_window.configure(bg="#2D74B2")
         
         # Uhrzeige
         time_label = tk.Label(
             tool_window,
             font="Arial 48",
-            bg="green",
-            fg="yellow",
+            bg="#2D74B2",
+            fg="white",
             text="00:00:00"
         )
         time_label.pack(fill="x")

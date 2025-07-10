@@ -43,6 +43,7 @@ Thumbs.db
 *.jpg
 *.jpeg
 *.png
+!.screenshots/*.png
 
 # QR-Code-Dateien
 static/qr_codes/*

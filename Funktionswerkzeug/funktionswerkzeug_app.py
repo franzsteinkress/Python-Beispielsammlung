@@ -25,6 +25,7 @@ class Funktionswerkzeug:
         self.haupt_fenster = haupt_fenster
         self.haupt_fenster.title("Funktionswerkzeug")
         self.haupt_fenster.iconbitmap('static/icons/fs.ico')
+        self.haupt_fenster.configure(bg="#2D74B2")
 
         # Fenstergröße und Zentrierung
         breite = 500
@@ -37,7 +38,7 @@ class Funktionswerkzeug:
         self.haupt_fenster.resizable(False, False)
         
         # Hauptframe für Buttons
-        haupt_frame = tk.Frame(self.haupt_fenster, padx=10, pady=10)
+        haupt_frame = tk.Frame(self.haupt_fenster, bg="#2D74B2", padx=10, pady=10)
         haupt_frame.pack(expand=True, fill="both")
         
         # Werkzeug-Buttons
@@ -249,7 +250,8 @@ class Funktionswerkzeug:
         fenster.geometry("400x300")
         fenster.resizable(False, False)
         fenster.iconbitmap('static/icons/fs.ico')
-        
+        fenster.configure(bg="#2D74B2")
+
         tk.Label(fenster, text="URL eingeben:", font="Arial 12").pack(pady=5)
         url_eingabe = tk.Entry(fenster, width=30, font="Arial 12")
         url_eingabe.pack(pady=5)

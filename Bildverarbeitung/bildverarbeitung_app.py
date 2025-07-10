@@ -33,16 +33,17 @@ class Bildverarbeitung:
         y = (bildschirm_hoehe - hoehe) // 2
         self.haupt_fenster.geometry(f"{breite}x{hoehe}+{x}+{y}")
         self.haupt_fenster.resizable(True, True)
+        self.haupt_fenster.configure(bg="#2D74B2")
         
         # Menüleiste
         self.erstelle_menue()
         
         # Hauptframe
-        self.haupt_frame = tk.Frame(self.haupt_fenster)
+        self.haupt_frame = tk.Frame(self.haupt_fenster, bg="#2D74B2")
         self.haupt_frame.pack(expand=True, fill="both", padx=10, pady=10)
         
         # Werkzeugleiste für Filter
-        self.werkzeug_leiste = tk.Frame(self.haupt_frame)
+        self.werkzeug_leiste = tk.Frame(self.haupt_frame, bg="#2D74B2")
         self.werkzeug_leiste.pack(fill="x")
         
         tk.Button(
@@ -81,7 +82,7 @@ class Bildverarbeitung:
         ).pack(side=tk.LEFT, padx=5)
         
         # Bildanzeigebereich
-        self.bild_label = tk.Label(self.haupt_frame)
+        self.bild_label = tk.Label(self.haupt_frame, bg="#2D74B2")
         self.bild_label.pack(expand=True, fill="both")
     
     def erstelle_menue(self):

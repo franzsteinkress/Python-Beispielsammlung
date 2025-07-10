@@ -59,6 +59,8 @@ fenster = tk.Tk()
 fenster.title("Lizenzprüfer GUI")
 fenster.iconbitmap('resources/fs.ico')  # Benutzerdefiniertes Icon
 fenster.geometry("400x340")
+#fenster.configure(bg="#2D74B2")
+
 
 # Frame für Schlüsselpaar
 frame_key = tk.LabelFrame(fenster, text="Schlüsselpaar generieren")
