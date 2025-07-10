@@ -129,4 +129,4 @@ Die grafische Benutzeroberfläche (`notizen_gui.py`) erfordert die gleichzeitige
 - Zeigt alle Notizen mit ID, Titel, Inhalt und Erstellungsdatum an.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

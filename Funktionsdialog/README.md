@@ -46,4 +46,4 @@ Eine Tkinter-basierte Python-Anwendung mit einem Texteditor und Werkzeugen wie U
 - Einige Funktionen (z. B. Bildbetrachter) sind auf einfache Formate beschränkt.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Liz-Lizenz lizenziert. Siehe `LICENSE.md` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

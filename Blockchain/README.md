@@ -60,4 +60,4 @@ Die Demo stellt grundlegende Funktionen bereit, wie die Verbindung zu einer Gana
 - Der Transaktions-Hash wird als durchgehender String angezeigt; bei Überschreiten der Fensterbreite wird er abgeschnitten.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

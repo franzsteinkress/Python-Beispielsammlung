@@ -30,4 +30,4 @@ Eine einfache Tkinter-Anwendung, die ein Hauptfenster mit einem Button anzeigt, 
   * „Nein“: Schließt den Dialog und die gesamte Anwendung.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

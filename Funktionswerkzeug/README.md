@@ -42,4 +42,4 @@ Eine Tkinter-basierte Python-Anwendung mit verschiedenen Werkzeugen:
 - QR-Codes werden in `static/qr_codes/` gespeichert.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

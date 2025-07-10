@@ -60,4 +60,4 @@ Eingabefelder für das Passwort, die Eingabedatei (Standard: `verschluesselt.bin
 - Ergebnisse und Fehlermeldungen (z. B. bei falschem Passwort oder ungültigen Dateien) werden in Pop-up-Fenstern angezeigt.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

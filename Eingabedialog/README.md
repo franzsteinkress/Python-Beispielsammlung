@@ -30,4 +30,4 @@ Eine einfache Python-Anwendung mit Tkinter, die ein Hauptfenster mit einem Einga
 - Schließe den Dialog mit „Abbrechen“ oder der Escape-Taste.
 
 ## Lizenz
-Diese Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

@@ -30,4 +30,4 @@ Eine einfache Tkinter-basierte Python-Anwendung zum Anzeigen von CSV-Dateien von
 - Unterstützt UTF-8-Encoding mit BOM (typisch für Bank-CSVs).
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

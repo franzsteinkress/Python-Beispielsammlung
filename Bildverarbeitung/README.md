@@ -35,4 +35,4 @@ Eine einfache Tkinter-basierte Python-Anwendung für typische OpenCV-Bildverarbe
 - Bilder werden in einer maximalen Größe von 500x500 Pixeln angezeigt.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

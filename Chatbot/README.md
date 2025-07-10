@@ -38,4 +38,4 @@ Eine einfache Flask-Webanwendung mit einem rudimentären Chatbot Simulator, der 
 - Die Anwendung läuft standardmäßig im Debug-Modus (nur für Entwicklung), was detaillierte Fehlerseiten und automatisches Neuladen bei Code-Änderungen ermöglicht. Um den Debug-Modus zu deaktivieren (z. B. für Produktion), setze `app.debug = False`.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

@@ -65,4 +65,4 @@ Ein Eingabefeld für den Pfad zur Lizenzdatei startet die Prüfung mit `lizenzpr
 - Ergebnisse und Fehlermeldungen werden in Pop-up-Fenstern angezeigt.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

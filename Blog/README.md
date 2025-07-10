@@ -40,4 +40,4 @@ Eine einfache Blog-Anwendung mit Flask und SQLite, die das Erstellen, Bearbeiten
 - **Debug-Modus**: Die Anwendung läuft standardmäßig im Debug-Modus, was detaillierte Fehlerseiten und automatisches Neuladen bei Code-Änderungen ermöglicht. Dies ist für die Entwicklung gedacht. Um den Debug-Modus zu deaktivieren (z. B. für Produktion), setze `app.debug = False` oder führe die Anwendung mit `FLASK_ENV=production flask run` aus. Beachte, dass der Debug-Modus Sicherheitsrisiken in einer öffentlichen Umgebung birgt.
 
 ## Lizenz
-Die Anwendung ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE` für Details.
+Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.
