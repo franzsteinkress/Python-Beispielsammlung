@@ -16,7 +16,7 @@ Eine einfache Python-Anwendung mit Tkinter, die ein Hauptfenster mit einem Einga
    ```bash
    cd ./Eingabedialog
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Starte die Anwendung:
    ```bash

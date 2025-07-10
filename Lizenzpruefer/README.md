@@ -16,7 +16,7 @@ Ein Python-basiertes Lizenzprüfungssystem, das Lizenzdateien mit RSA-Signaturen
    ```bash
    cd ./Lizenzpruefer
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere die Abhängigkeit:
    ```bash
@@ -55,7 +55,7 @@ Ein Eingabefeld für den Pfad zur Lizenzdatei startet die Prüfung mit `lizenzpr
 #### GUI-Start
 1. Aktiviere die virtuelle Umgebung:
    ```bash
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 2. Führe das GUI-Skript aus:
    ```bash

@@ -16,7 +16,7 @@ Eine Flask-basierte REST-API zur Verwaltung von Notizen mit SQLite-Datenbank und
    ```bash
    cd ./Notizenverwaltung
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere die Abhängigkeiten:
    ```bash
@@ -75,7 +75,7 @@ Eine Flask-basierte REST-API zur Verwaltung von Notizen mit SQLite-Datenbank und
 Die grafische Benutzeroberfläche (`notizen_gui.py`) erfordert die gleichzeitige Ausführung der REST-API (`notizen_api.py`). Dies kann durch die Nutzung von zwei separaten Terminals erreicht werden. Führen Sie die folgenden Schritte aus:
 
 ### Voraussetzungen
-- Die virtuelle Umgebung ist aktiviert (`.venv\Scripts\activate`).
+- Die virtuelle Umgebung ist aktiviert (`.venv\Scripts\Activate.ps1`).
 - Die Datenbank (`database.db`) ist initialisiert (z. B. durch `python init_db.py`).
 
 ### Schritt-für-Schritt-Anleitung

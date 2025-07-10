@@ -17,7 +17,7 @@ Eine einfache Flask-Webanwendung mit einem rudimentären Chatbot Simulator, der 
    ```bash
    cd ./ChatBot
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 5. Installiere Flask:
    ```bash

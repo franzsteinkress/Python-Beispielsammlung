@@ -29,7 +29,7 @@ Die Demo stellt grundlegende Funktionen bereit, wie die Verbindung zu einer Gana
      ```bash
      cd ./Blockchain
      python -m venv .venv
-     .venv\Scripts\activate
+     .venv\Scripts\Activate.ps1
      ```
    - Installiere die Abhängigkeiten:
      ```bash

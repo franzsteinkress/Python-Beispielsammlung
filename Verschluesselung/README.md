@@ -16,7 +16,7 @@ Ein einfaches AES-Verschlüsselungstool in Python mit der `cryptography`-Bibliot
    ```bash
    cd ./Verschluesselung
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere die Abhängigkeit:
    ```bash
@@ -50,7 +50,7 @@ Eingabefelder für das Passwort, die Eingabedatei (Standard: `verschluesselt.bin
 #### GUI-Start
 1. Aktiviere die virtuelle Umgebung:
    ```bash
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 2. Führe das GUI-Skript aus:
    ```bash

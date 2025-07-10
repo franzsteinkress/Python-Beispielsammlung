@@ -17,7 +17,7 @@ Eine einfache Tkinter-basierte Python-Anwendung für typische OpenCV-Bildverarbe
    ```bash
    cd ./Bildverarbeitung
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere die Abhängigkeiten:
    ```bash

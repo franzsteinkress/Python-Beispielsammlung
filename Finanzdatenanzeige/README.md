@@ -16,7 +16,7 @@ Eine einfache Tkinter-basierte Python-Anwendung zum Anzeigen von CSV-Dateien von
    ```bash
    cd ./Finanzdatenanzeige
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 3. Starte die Anwendung:
    ```bash

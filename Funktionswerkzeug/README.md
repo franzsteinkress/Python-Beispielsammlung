@@ -12,7 +12,7 @@ Eine Tkinter-basierte Python-Anwendung mit verschiedenen Werkzeugen:
 
 ## Voraussetzungen
 - Python 3.13.4 oder höher
-- Bibliotheken: `colorama`, `pyqrcode`, `pypng`, `Pillow`
+- Bibliotheken: `colorama`, `pyqrcode`, `pypng`, `pillow`
 - Tkinter (in Python enthalten)
 
 ## Installation
@@ -25,7 +25,7 @@ Eine Tkinter-basierte Python-Anwendung mit verschiedenen Werkzeugen:
    ```bash
    cd ./Funktionswerkzeug
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere die Abhängigkeiten:
    ```bash

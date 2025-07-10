@@ -5,7 +5,7 @@ Eine Tkinter-basierte Python-Anwendung mit einem Texteditor und Werkzeugen wie U
 ## Voraussetzungen
 - Python 3.13.4 oder höher
 - Tkinter (Standardbibliothek)
-- Pillow (`pip install Pillow`)
+- Pillow (`pip install pillow`)
 
 ## Installation
 1. Klone das Repository oder kopiere die Datei `funktionsdialog_app.py`.
@@ -17,11 +17,11 @@ Eine Tkinter-basierte Python-Anwendung mit einem Texteditor und Werkzeugen wie U
    ```bash
    cd ./Funktionsdialog
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere Pillow:
    ```bash
-   pip install Pillow
+   pip install pillow
    ```
 5. Starte die Anwendung:
    ```bash

@@ -16,7 +16,7 @@ Eine einfache Tkinter-Anwendung, die ein Hauptfenster mit einem Button anzeigt, 
    ```bash
    cd ./Bestaetigungsdialog
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Starte die Anwendung:
    ```bash

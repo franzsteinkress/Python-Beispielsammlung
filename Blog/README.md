@@ -16,7 +16,7 @@ Eine einfache Blog-Anwendung mit Flask und SQLite, die das Erstellen, Bearbeiten
    ```bash
    cd ./Blog
    python -m venv .venv
-   .venv\Scripts\activate
+   .venv\Scripts\Activate.ps1
    ```
 4. Installiere Flask:
    ```bash
