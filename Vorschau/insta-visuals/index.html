@@ -1,0 +1,153 @@
+<!-- Copyright (c) 2025 Franz Steinkress
+     Licensed under the MIT License - see LICENSE for details -->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>UI Design Vorschau</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="overlay-box" id="overlayBox">
+        <div class="nav-arrows">
+            <button id="leftBtn" class="arrow left">←</button>
+            <button id="rightBtn" class="arrow right">→</button>
+        </div>
+        <div class="text">
+            <div class="line1" id="title">Titel</div>
+            <div class="line2" id="description">Beschreibung</div>
+            <div class="line3" id="note">Hinweis</div>
+        </div>
+        <img src="./assets/bildverarbeitung.png" alt="Screenshots des Designs">
+        <button id="closeBtn">Bild 1 von 23</button>
+    </div>
+    <!--<div class="safe-area-frame"></div>-->
+
+    <script>
+        const images = [
+            "bildverarbeitung.png", 
+            "blockchain.png", 
+            "finanzdatenanzeige.png", 
+            "lizenzpruefer.png", 
+            "verschluesselung.png", 
+            "blog.png", 
+            "blogcreate.png", 
+            "chatbot.png", 
+            "notizenverwaltung.png", 
+            "notizenverwaltungnotizen.png", 
+            "notizenverwaltungapi.png"
+        ];
+
+        const titles = [
+            "Bildverarbeitung", 
+            "Blockchain", 
+            "Finanzdatenanzeige", 
+            "Lizenzpruefer", 
+            "Verschluesselung", 
+            "Blog", 
+            "Blog", 
+            "Chatbot", 
+            "Notizenverwaltung", 
+            "Notizenverwaltung", 
+            "Notizenverwaltung"
+        ];
+
+        const descriptions = [
+            "Python-Anwendung mit OpenCV", 
+            "Python-Blockchain-Demo mit Web3 und Ganache", 
+            "Python-Anwendung mit Bankdaten im CSV-Format", 
+            "Python-Anwendung mit RSA-Lizenzdateien", 
+            "Python-AES-Verschlüsselung mit 'cryptography'", 
+            "Webanwendung mit Flask und SQLite-Datenbank", 
+            "Webanwendung zum Erstellen eines Blogbeitrags", 
+            "Webanwendung mit Flask", 
+            "Python-Anwendung mit Flask und SQLite", 
+            "Webanwendung mit Flask und SQLite (REST-API)", 
+            "Webanwendung mit Datenbankauszug der Notizen", 
+        ];
+
+        const notes = [
+            "Theme: 'plastik' - Layout-Manager: pack()", 
+            "Theme: 'radiance' - Layout-Manager: grid()", 
+            "Theme: 'alt' - Layout-Manager: grid()", 
+            "Theme: 'classic' - Layout-Manager: grid()", 
+            "Theme: tk-Widgets - Layout-Manager: grid()", 
+            "Theme: Bootstrap 5.3 Standard mit Anpassungen", 
+            "Theme: Bootstrap 5.3 Standard mit Anpassungen", 
+            "Theme: Eigenes minimalistisches CSS", 
+            "Theme: 'clam' - Layout-Manager: pack()", 
+            "Theme: Bootstrap 5.3 Standard mit Anpassungen", 
+            "Theme: Bootstrap 5.3 Standard mit Anpassungen"
+        ];
+
+        const dominantColors = [
+            "#ffde88", "#f56cb5", "#91d6ff", "#91d6ff", "#91d6ff",
+            "#91d6ff", "#91d6ff", "#ffde88", "#ffde88", "#91d6ff",
+            "#91d6ff"
+        ];
+
+        const fontColors = [
+            "#333", "#333", "#333", "#333", "#333", 
+            "#333", "#333", "#333", "#333", "#333", 
+            "#333"
+        ];
+
+        let imageIndex = 0;
+        const img = document.querySelector(".overlay-box img");
+        const button = document.getElementById("closeBtn");
+        const titl = document.getElementById("title");
+        const desc = document.getElementById("description");
+        const note = document.getElementById("note");
+        const overlayBox = document.getElementById("overlayBox");
+        const lBtn = document.getElementById("leftBtn");
+        const rBtn = document.getElementById("rightBtn");
+
+        function updateView() {
+            img.src = `./assets/${images[imageIndex]}`;
+            titl.innerText = titles[imageIndex] || "Kein Titel verfügbar";
+            desc.innerText = descriptions[imageIndex] || "Keine Beschreibung verfügbar";
+            note.innerText = notes[imageIndex] || "Kein Hinweis verfügbar";
+            button.innerText = `Bild ${imageIndex + 1} von ${images.length}`;
+            overlayBox.style.backgroundColor = dominantColors[imageIndex];
+            overlayBox.style.color = fontColors[imageIndex];
+            overlayBox.style.outline = dominantColors[imageIndex];
+            lBtn.style.backgroundColor =  dominantColors[imageIndex];
+            lBtn.style.color =  fontColors[imageIndex];
+            lBtn.style.outline = dominantColors[imageIndex];
+            rBtn.style.backgroundColor =  dominantColors[imageIndex];
+            rBtn.style.color =  fontColors[imageIndex];
+            rBtn.style.outline = dominantColors[imageIndex];
+        }
+
+        function nextImage() {
+            imageIndex = (imageIndex + 1) % images.length;
+            updateView();
+        }
+
+        function prevImage() {
+            imageIndex = (imageIndex - 1 + images.length) % images.length;
+            updateView();
+        }
+
+        document.getElementById("leftBtn").addEventListener("click", prevImage);
+        document.getElementById("rightBtn").addEventListener("click", nextImage);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") prevImage();
+            if (e.key === "ArrowRight") nextImage();
+        });
+
+        let startX = 0;
+        document.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+        document.addEventListener("touchend", (e) => {
+            const dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 50) {
+                dx > 0 ? prevImage() : nextImage();
+            }
+        });
+
+        updateView();
+    </script>
+</body>
+</html>

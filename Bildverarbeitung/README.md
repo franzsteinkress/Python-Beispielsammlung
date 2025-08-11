@@ -4,7 +4,7 @@ Eine einfache Tkinter-basierte Python-Anwendung für typische OpenCV-Bildverarbe
 
 ## Voraussetzungen
 - Python 3.13.4 oder höher
-- Bibliotheken: `opencv-python`, `Pillow`
+- Bibliotheken: `opencv-python`, `Pillow`, `ttkthemes`
 - Tkinter (in Python enthalten)
 
 ## Installation
@@ -21,7 +21,7 @@ Eine einfache Tkinter-basierte Python-Anwendung für typische OpenCV-Bildverarbe
    ```
 4. Installiere die Abhängigkeiten:
    ```bash
-   pip install opencv-python Pillow
+   pip install opencv-python Pillow ttkthemes
    ```
 5. Starte die Anwendung:
    ```bash

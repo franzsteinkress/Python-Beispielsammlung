@@ -5,7 +5,7 @@
 # Eine GUI für das Lizenzprüfungssystem
 
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import subprocess
 import os
 
@@ -57,40 +57,51 @@ def check_license():
 # Hauptfenster
 fenster = tk.Tk()
 fenster.title("Lizenzprüfer GUI")
-fenster.iconbitmap('resources/fs.ico')  # Benutzerdefiniertes Icon
+fenster.iconbitmap('resources/fs.ico')
 fenster.geometry("400x340")
-#fenster.configure(bg="#2D74B2")
 
+# ttk Theme auf "classic" setzen
+style = ttk.Style()
+style.theme_use("classic")
+
+# Hintergrundfarben anpassen
+fenster.configure(bg="#E0E0E0")
+style.configure("TLabel", background="#E0E0E0", foreground="black")
+style.configure("TButton", background="#D0D0D0", foreground="black")
+style.configure("TLabelframe", background="#E0E0E0", foreground="black")
+style.configure("TLabelframe.Label", background="#E0E0E0", foreground="black")
 
 # Frame für Schlüsselpaar
-frame_key = tk.LabelFrame(fenster, text="Schlüsselpaar generieren")
+frame_key = ttk.LabelFrame(fenster, text="Schlüsselpaar generieren")
 frame_key.grid(row=0, column=0, padx=10, pady=5, sticky="ew")
-tk.Button(frame_key, text="Schlüsselpaar generieren", command=generate_keypair).grid(row=0, column=0, pady=5)
+ttk.Button(frame_key, text="Schlüsselpaar generieren", command=generate_keypair).grid(row=0, column=0, pady=5)
 
 # Frame für Lizenz erstellen
-frame_create = tk.LabelFrame(fenster, text="Lizenzdatei erstellen")
+frame_create = ttk.LabelFrame(fenster, text="Lizenzdatei erstellen")
 frame_create.grid(row=1, column=0, padx=10, pady=5, sticky="ew")
-tk.Label(frame_create, text="Lizenznehmer:").grid(row=0, column=0, padx=5, pady=2)
-entry_lizenznehmer = tk.Entry(frame_create, width=30)
+ttk.Label(frame_create, text="Lizenznehmer:").grid(row=0, column=0, padx=5, pady=2, sticky="e")
+entry_lizenznehmer = ttk.Entry(frame_create, width=30)
 entry_lizenznehmer.grid(row=0, column=1, padx=5, pady=2)
-tk.Label(frame_create, text="Ablaufdatum (YYYY-MM-DD):").grid(row=1, column=0, padx=5, pady=2)
-entry_ablaufdatum = tk.Entry(frame_create, width=30)
+ttk.Label(frame_create, text="Ablaufdatum (YYYY-MM-DD):").grid(row=1, column=0, padx=5, pady=2, sticky="e")
+entry_ablaufdatum = ttk.Entry(frame_create, width=30)
 entry_ablaufdatum.grid(row=1, column=1, padx=5, pady=2)
-tk.Label(frame_create, text="Produkt-ID:").grid(row=2, column=0, padx=5, pady=2)
-entry_produkt_id = tk.Entry(frame_create, width=30)
+ttk.Label(frame_create, text="Produkt-ID:").grid(row=2, column=0, padx=5, pady=2, sticky="e")
+entry_produkt_id = ttk.Entry(frame_create, width=30)
 entry_produkt_id.grid(row=2, column=1, padx=5, pady=2)
-tk.Label(frame_create, text="Lizenzdatei:").grid(row=3, column=0, padx=5, pady=2)
-entry_lizenz_datei = tk.Entry(frame_create, width=30)
+ttk.Label(frame_create, text="Lizenzdatei:").grid(row=3, column=0, padx=5, pady=2, sticky="e")
+entry_lizenz_datei = ttk.Entry(frame_create, width=30)
 entry_lizenz_datei.grid(row=3, column=1, padx=5, pady=2)
-tk.Button(frame_create, text="Lizenz erstellen", command=create_license).grid(row=4, column=0, columnspan=2, pady=5)
+ttk.Button(frame_create, text="Lizenz erstellen", command=create_license).grid(row=4, column=0, columnspan=2, pady=5)
 
 # Frame für Lizenz prüfen
-frame_check = tk.LabelFrame(fenster, text="Lizenzdatei prüfen")
+frame_check = ttk.LabelFrame(fenster, text="Lizenzdatei prüfen")
 frame_check.grid(row=2, column=0, padx=10, pady=5, sticky="ew")
-tk.Label(frame_check, text="Lizenzdatei:").grid(row=0, column=0, pady=2, sticky="e")
-entry_lizenz_datei_check = tk.Entry(frame_check, width=30)
+ttk.Label(frame_check, text="Lizenzdatei:").grid(row=0, column=0, pady=2, sticky="e")
+entry_lizenz_datei_check = ttk.Entry(frame_check, width=30)
 entry_lizenz_datei_check.grid(row=0, column=1, pady=2, sticky="w")
-tk.Button(frame_check, text="Lizenz prüfen", command=check_license).grid(row=1, column=0, columnspan=2, pady=5)
+ttk.Button(frame_check, text="Lizenz prüfen", command=check_license).grid(row=1, column=0, columnspan=2, pady=5)
+
+fenster.grid_columnconfigure(0, weight=1)
 
 # Start der Hauptschleife
 fenster.mainloop()

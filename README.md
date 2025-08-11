@@ -1,8 +1,6 @@
 # Python-Beispielsammlung
 
-![Python](https://img.shields.io/badge/Python-3.13-blue)
-![VS Code](https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.13-blue) ![VS Code](https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green)
 
 Dies ist eine Sammlung von **12 eigenständigen Python-Projekten**, jeweils in einem eigenen Unterordner organisiert. Die Projekte decken verschiedene Themen ab – von GUI-Anwendungen mit Tkinter bis hin zu Web-APIs mit Flask und Blockchain-Demos mit Web3.
 

@@ -12,6 +12,11 @@ dist/
 build/
 *.whl
 
+# Puppeteer
+node_modules/
+package-lock.json
+package.json
+
 # Virtuelle Umgebung
 .venv/
 .env
@@ -44,6 +49,8 @@ Thumbs.db
 *.jpeg
 *.png
 !.screenshots/*.png
+!Vorschau/html-visuals/assets/*
+!Vorschau/insta-visuals/assets/*
 
 # QR-Code-Dateien
 static/qr_codes/*
@@ -58,3 +65,4 @@ config/keys/*
 !config/keys/.keep
 config/licenses/*
 !config/licenses/.keep
+*.txt

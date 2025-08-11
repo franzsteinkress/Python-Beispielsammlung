@@ -83,7 +83,7 @@ Die grafische Benutzeroberfläche (`notizen_gui.py`) erfordert die gleichzeitige
    - Öffnen Sie ein Terminal im Projektverzeichnis (z. B. `C:\repos\Python-Beispielsammlung\Notizenverwaltung`).
    - Führen Sie den folgenden Befehl aus, um die API zu starten:
      ```powershell
-     python notizen_api.py
+     python notizen_app.py
      ```
    - Vergewissern Sie sich, dass der Server erfolgreich startet (Ausgabe: `Running on http://localhost:5000/`).
 

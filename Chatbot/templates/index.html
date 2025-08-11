@@ -1,152 +1,101 @@
 <!-- Copyright (c) 2025 Franz Steinkress
      Licensed under the MIT License - see LICENSE for details -->
 
-<script type="text/javascript">
-    // Variable, die angibt, ob es sich um eine XLSX-Datei handelt
-    var gk_isXlsx = false;
-    // Lookup-Objekt für XLSX-Dateien
-    var gk_xlsxFileLookup = {};
-    // Objekt zum Speichern der Dateidaten
-    var gk_fileData = {};
-
-    // Funktion prüft, ob eine Zelle gefüllt ist (nicht leer und nicht null)
-    function filledCell(cell) {
-        return cell !== '' && cell != null;
-    }
-
-    // Funktion lädt die Daten einer Datei und verarbeitet sie
-    function loadFileData(filename) {
-        // Prüft, ob es sich um eine XLSX-Datei handelt und ob die Datei im Lookup vorhanden ist
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                // Liest die XLSX-Datei mit base64-Daten
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                // Holt den Namen des ersten Arbeitsblatts
-                var firstSheetName = workbook.SheetNames[0];
-                // Holt das erste Arbeitsblatt
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Konvertiert das Arbeitsblatt in JSON, um leere Zeilen zu filtern
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filtert leere Zeilen heraus (Zeilen, in denen alle Zellen leer, null oder undefined sind)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristik, um die Kopfzeile zu finden, indem Zeilen mit weniger gefüllten Zellen als die nächste Zeile ignoriert werden
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback, falls keine Kopfzeile gefunden wird oder der Index zu hoch ist
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                    headerRowIndex = 0;
-                }
-
-                // Konvertiert die gefilterten JSON-Daten zurück in CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Erstellt ein neues Arbeitsblatt aus dem gefilterten Array
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                // Fehler in der Konsole ausgeben
-                console.error(e);
-                return "";
-            }
-        }
-        // Gibt die Dateidaten zurück, falls keine XLSX-Verarbeitung nötig ist
-        return gk_fileData[filename] || "";
-    }
-</script>
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Simulator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #2D74B2;
-            color: #FFFFFF;
-        }
-        h1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        h1 img {
-            height: 30px;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-        #chatbox {
-            width: 500px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #E0E0E0;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 150px;
-        }
-        #userInput {
-            width: 80%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 5px 15px;
-            background-color: #2D74B2;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 5px 0;
-        }
-        button:hover {
-            background-color: #4A4A4A;
-        }
-        #response {
-            margin-top: 20px;
-            word-wrap: break-word;
-            width: 80%;
-            text-align: left;
-            color: #000;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>
-        <img src="{{ url_for('static', filename='icons/fs.ico') }}" alt="Chatbot Icon">
-        Einfacher Chatbot Simulator
-    </h1>
-    <div id="chatbox">
-        <input type="text" id="userInput" placeholder="Nachricht eingeben...">
-        <button onclick="sendMessage()">Senden</button>
-        <div id="response"></div>
+    <div class="container">
+        <h1><img src="{{ url_for('static', filename='icons/fs.ico') }}" alt="Chatbot Icon">Chatbot Simulator</h1>
+        <div id="chat-history">
+            {% for msg in session.get('chat_history', []) %}
+                <p><strong>User:</strong> {{ msg.user }}</p>
+                <p><strong>Bot:</strong> {{ msg.bot }}</p>
+            {% endfor %}
+        </div>
+        <!-- Simulation eines Chatverlaufs für Screenshots -->
+        <!--<div id="chat-history">
+            <style>
+                #chat-history div:nth-child(even) {
+                    margin: 5px 0;
+                    text-align: left;
+                    color: #000000;
+                }
+                #chat-history div:nth-child(odd) {
+                    margin: 5px 0;
+                    text-align: right;
+                    color: #007bff;
+                }
+            </style>
+            <div><strong>User:</strong> Hallo</div>
+            <div><strong>Bot:</strong> Hallo! Wie kann ich dir helfen?</div>
+            <div><strong>User:</strong> Hilfe</div>
+            <div><strong>Bot:</strong> Ich bin hier, um zu antworten. Was möchtest du wissen?</div>
+            <div><strong>User:</strong> Nichts</div>
+            <div><strong>Bot:</strong> Antwort: Du hast 'nichts' gesagt!</div>
+            <div><strong>User:</strong> Was bist Du?</div>
+            <div><strong>Bot:</strong> Antwort: Du hast 'was bist du?' gesagt!</div>
+            <div><strong>User:</strong> Wo bist Du?</div>
+            <div><strong>Bot:</strong> Antwort: Du hast 'wo bist du?' gesagt!</div>
+            <div><strong>User:</strong> Bye</div>
+            <div><strong>Bot:</strong> Tschüss, bis bald!</div>
+        </div>-->
+        <div id="chatbox">
+            <div id="input-container">
+                <input type="text" id="user-input" placeholder="Deine Nachricht..." onkeypress="if(event.key === 'Enter') sendMessage();">
+                <button onclick="sendMessage()">Senden</button>
+            </div>
+            <button id="clear-history-btn" onclick="clearHistory()">Historie löschen</button>
+        </div>
     </div>
     <script>
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
         function sendMessage() {
-            const input = document.getElementById("userInput").value;
+            const input = document.getElementById("user-input").value.trim();
             if (input) {
+                const escapedInput = escapeHtml(input);
                 fetch(`/get?msg=${encodeURIComponent(input)}`)
                     .then(response => response.text())
                     .then(data => {
-                        document.getElementById("response").innerText = data;
-                        document.getElementById("userInput").value = "";
-                    });
+                        const chatHistory = document.getElementById("chat-history");
+                        chatHistory.innerHTML += `<p><strong>User:</strong> ${escapedInput}</p>`;
+                        chatHistory.innerHTML += `<p><strong>Bot:</strong> ${data}</p>`;
+                        document.getElementById("user-input").value = "";
+                        chatHistory.scrollTop = chatHistory.scrollHeight;
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                alert("Bitte gib eine Nachricht ein!");
             }
         }
-        document.getElementById("userInput").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") sendMessage();
-        });
+
+        function clearHistory() {
+            // Zu viele Abfragen beim Löschen stören!
+            //if (confirm("Möchtest du die Chat-Historie wirklich löschen?")) {
+                fetch('/clear')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("chat-history").innerHTML = "";
+                        //alert(data);
+                    })
+                    .catch(error => console.error('Error:', error));
+            //}
+        }
     </script>
 </body>
 </html>

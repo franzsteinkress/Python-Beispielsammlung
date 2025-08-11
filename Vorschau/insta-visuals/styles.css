@@ -1,0 +1,145 @@
+/*   Copyright (c) 2025 Franz Steinkress
+     Licensed under the MIT License - see LICENSE for details */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Segoe UI", sans-serif;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.overlay-box {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 9 / 16;
+    height: 100vh;
+    width: 56.25vh; /* 16:9 Breite zu 100% Höhe */
+    max-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid white;
+    padding: 5.0vh 5.0vh;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    overflow: visible;
+}
+
+.overlay-box main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-box header,
+.overlay-box footer {
+    font-size: 2.2vh;
+    font-weight: bold;
+}
+
+.text {
+    margin-top: 9.0vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text .line1 {
+    margin-bottom: 1.5vh;
+    font-size: 2.4vh;
+    font-weight: bold;
+}
+
+.text .line2 {
+    font-size: 2vh;
+}
+
+.text .line3 {
+    font-size: 2vh;
+}
+
+.overlay-box img {
+    width: 100%; /* Bild füllt die Breite der overlay-box */
+    height: auto;
+    object-fit: contain;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(200, 50, 50, 0.8);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#closeBtn {
+    margin-bottom: 10.0vh;
+    padding: 1vh 2vh;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 1.8vh;
+    cursor: default;
+}
+
+.nav-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+}
+
+.arrow {
+    margin-top: 40px;
+    pointer-events: auto;
+    background: none;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 2vh;
+    font-weight: bold;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, background 0.3s ease;
+    outline: 1px solid lime;
+}
+
+.arrow.left  { left: -3.0rem;  margin-left: -3.5rem; top: 50%; transform: translateY(-50%) scale(1); }
+.arrow.right { right: -3.0rem; margin-right: -3.5rem; top: 50%; transform: translateY(-50%) scale(1); }
+.arrow:hover { transform: translateY(-50%) scale(1.2); }
+
+.safe-area-frame {
+    position: absolute;
+    top: 250px;
+    left: 90px;
+    width: 900px;   /* 1080 - 2×90px */
+    height: 1420px; /* 1920 - 2×250px */
+    border: 2px dashed red;
+    pointer-events: none;
+    box-sizing: border-box;
+    z-index: 9999;  /* Sicher ganz oben */
+}

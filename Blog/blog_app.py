@@ -10,8 +10,8 @@ from werkzeug.exceptions import abort
 
 # Blog-Anwendung initialisieren
 blog_app = Flask(__name__)
-blog_app.config.SECRET_KEY = "dein_geheimer_schluessel"
-# Der Wert "dein_geheimer_schluessel" ist ein Platzhalter und sollte durch einen langen, 
+blog_app.config.SECRET_KEY = "mein_geheimer_schluessel"
+# Der Wert "mein_geheimer_schluessel" ist ein Platzhalter und sollte durch einen langen, 
 # zufälligen und sicheren Schlüssel ersetzt werden.
 # Der SECRET_KEY wird nur dann aktiv genutzt, wenn du Features wie Sitzungen, 
 # Formulare mit CSRF-Schutz oder andere sicherheitsabhängige Funktionen in deiner Blog-Anwendung implementierst.

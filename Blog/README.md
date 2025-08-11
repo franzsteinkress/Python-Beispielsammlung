@@ -38,6 +38,11 @@ Eine einfache Blog-Anwendung mit Flask und SQLite, die das Erstellen, Bearbeiten
 
 ## Hinweis
 - **Debug-Modus**: Die Anwendung läuft standardmäßig im Debug-Modus, was detaillierte Fehlerseiten und automatisches Neuladen bei Code-Änderungen ermöglicht. Dies ist für die Entwicklung gedacht. Um den Debug-Modus zu deaktivieren (z. B. für Produktion), setze `app.debug = False` oder führe die Anwendung mit `FLASK_ENV=production flask run` aus. Beachte, dass der Debug-Modus Sicherheitsrisiken in einer öffentlichen Umgebung birgt.
-
+- **Screenshots**: 
+Mit der Eingabeaufforderung und diesen Befehlen können Screenshots des Blogs im Browser von http://localhost:5000/ usw. erstellt werden.
+http://localhost:5000/
+`"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --screenshot=C:\Users\Franz\Desktop\screenshot1.png --window-size=1280,720 http://localhost:5000/`
+http://localhost:5000/create
+`"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --screenshot=C:\Users\Franz\Desktop\screenshot2.png --window-size=1280,720 http://localhost:5000/create`
 ## Lizenz
 Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

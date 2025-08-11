@@ -6,6 +6,7 @@
 
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 import requests
 import json
 
@@ -18,7 +19,23 @@ class NotizenGUI:
         self.root.title("Notizenverwaltung")
         self.root.geometry("600x400")
         self.root.iconbitmap('./static/ico/fs.ico')
-        
+
+        # Style konfigurieren
+        style = ttk.Style()
+        style.theme_use("clam")
+        self.root.configure(bg="#2D74B2")
+        style.configure("TFrame", background="#2D74B2")
+        style.configure("TLabel", background="#2D74B2", foreground="white", font=("Segoe UI", 10))
+        style.configure("Primary.TButton",
+                        background="#2D74B2",
+                        foreground="white",
+                        font=("Segoe UI", 10, "bold"),
+                        padding=(8, 4),
+                        borderwidth=1)
+        style.map("Primary.TButton",
+                  background=[("active", "#255A92"), ("pressed", "#1F5380"), ("!disabled", "#2D74B2")],
+                  foreground=[("disabled", "#CFCFCF"), ("!disabled", "white")])
+
         # API-Basis-URL
         self.api_url = "http://127.0.0.1:5000/api/notizen"
         
@@ -29,8 +46,8 @@ class NotizenGUI:
     def erstelle_gui(self):
         """Erstellt die Tkinter-Oberfläche."""
         # Frame für Notizen-Liste
-        frame_liste = tk.Frame(self.root)
-        frame_liste.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        frame_liste = ttk.Frame(self.root, padding=10)
+        frame_liste.pack(fill=tk.BOTH, expand=True)
         
         # Listbox für Notizen
         self.notizen_liste = tk.Listbox(frame_liste, height=10, width=50)
@@ -38,32 +55,32 @@ class NotizenGUI:
         self.notizen_liste.bind('<<ListboxSelect>>', self.zeige_ausgewaehlte_notiz)
         
         # Scrollbar
-        scrollbar = tk.Scrollbar(frame_liste)
+        scrollbar = ttk.Scrollbar(frame_liste)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.notizen_liste.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.notizen_liste.yview)
         
         # Frame für Eingabefelder
-        frame_eingabe = tk.Frame(self.root)
-        frame_eingabe.pack(fill=tk.X, padx=10, pady=10)
+        frame_eingabe = ttk.Frame(self.root, padding=10)
+        frame_eingabe.pack(fill=tk.X)
         
         # Titel-Eingabe
-        tk.Label(frame_eingabe, text="Titel:").pack(side=tk.LEFT)
-        self.titel_eingabe = tk.Entry(frame_eingabe, width=40)
+        ttk.Label(frame_eingabe, text="Titel:").pack(side=tk.LEFT)
+        self.titel_eingabe = ttk.Entry(frame_eingabe, width=40)
         self.titel_eingabe.pack(side=tk.LEFT, padx=5)
         
         # Inhalt-Eingabe
-        tk.Label(frame_eingabe, text="Inhalt:").pack(side=tk.LEFT)
-        self.inhalt_eingabe = tk.Entry(frame_eingabe, width=40)
+        ttk.Label(frame_eingabe, text="Inhalt:").pack(side=tk.LEFT)
+        self.inhalt_eingabe = ttk.Entry(frame_eingabe, width=40)
         self.inhalt_eingabe.pack(side=tk.LEFT, padx=5)
         
         # Buttons
-        frame_buttons = tk.Frame(self.root)
-        frame_buttons.pack(fill=tk.X, padx=10, pady=10)
+        frame_buttons = ttk.Frame(self.root, padding=10)
+        frame_buttons.pack(fill=tk.X)
         
-        tk.Button(frame_buttons, text="Neu", command=self.erstelle_notiz, bg="#2D74B2", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(frame_buttons, text="Aktualisieren", command=self.aktualisiere_notiz, bg="#2D74B2", fg="white").pack(side=tk.LEFT, padx=5)
-        tk.Button(frame_buttons, text="Löschen", command=self.loesche_notiz, bg="#2D74B2", fg="white").pack(side=tk.LEFT, padx=5)
+        ttk.Button(frame_buttons, text="Neu", command=self.erstelle_notiz, style="Primary.TButton").pack(side=tk.LEFT, padx=5)
+        ttk.Button(frame_buttons, text="Aktualisieren", command=self.aktualisiere_notiz, style="Primary.TButton").pack(side=tk.LEFT, padx=5)
+        ttk.Button(frame_buttons, text="Löschen", command=self.loesche_notiz, style="Primary.TButton").pack(side=tk.LEFT, padx=5)
     
     def lade_notizen(self):
         """Lädt alle Notizen von der API und füllt die Listbox."""

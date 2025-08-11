@@ -16,7 +16,15 @@ class Finanzdatenanzeige:
         self.haupt_fenster = haupt_fenster
         self.haupt_fenster.title("Finanzdatenanzeige")
         self.haupt_fenster.iconbitmap('resources/fs.ico')
-        self.haupt_fenster.configure(bg="#2D74B2")
+        self.haupt_fenster.configure(bg="#E0E0E0")  # hellgrauer Hintergrund
+
+        # ttk-Theme auf "alt" setzen
+        style = ttk.Style()
+        style.theme_use("alt")
+
+        # Farben für Treeview anpassen
+        style.configure("Treeview", background="#FFFFFF", foreground="black", fieldbackground="#FFFFFF")
+        style.configure("TButton", background="#D0D0D0", foreground="black")
 
         self.csv_datei_pfad = ""
         
@@ -34,20 +42,29 @@ class Finanzdatenanzeige:
         self.erstelle_menue()
         
         # Hauptframe
-        self.haupt_frame = tk.Frame(self.haupt_fenster, bg="#2D74B2")
-        self.haupt_frame.pack(expand=True, fill="both", padx=10, pady=10)
+        self.haupt_frame = tk.Frame(self.haupt_fenster, bg="#E0E0E0")
+        self.haupt_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+
+        # Grid-Konfiguration Hauptfenster
+        self.haupt_fenster.grid_rowconfigure(0, weight=1)
+        self.haupt_fenster.grid_columnconfigure(0, weight=1)
         
         # Button zum Öffnen der Datei
         tk.Button(
             self.haupt_frame,
             text="CSV-Datei öffnen",
             command=self.oeffne_csv,
-            font="Arial 12"
-        ).pack(pady=10)
+            font="Arial 12",
+            bg="#D0D0D0"
+        ).grid(row=0, column=0, pady=10)
         
         # Frame für Tabelle + Scrollbars
         tabelle_frame = ttk.Frame(self.haupt_frame)
-        tabelle_frame.pack(expand=True, fill="both")
+        tabelle_frame.grid(row=1, column=0, sticky="nsew")
+
+        # Grid-Konfiguration für haupt_frame
+        self.haupt_frame.grid_rowconfigure(1, weight=1)
+        self.haupt_frame.grid_columnconfigure(0, weight=1)
 
         # Treeview (Tabelle)
         self.daten_tabelle = ttk.Treeview(tabelle_frame, show="headings")

@@ -4,13 +4,25 @@
 # chatbot_app.py
 # Eine Flask-Webanwendung mit einem einfachen Chatbot Simulator
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 # Chatbot-Simulator initialisieren
 web_app = Flask(__name__)
+web_app.secret_key = "mein_geheimer_schluessel_123"  # Setze einen sicheren, eindeutigen Schlüssel
 
 def simple_chatbot_response(user_input):
-    """Gibt eine einfache Antwort auf Benutzereingaben zurück."""
+    responses = {
+        "hallo": "Hallo! Wie kann ich dir helfen?",
+        "Hallo": "Hallo! Wie kann ich dir helfen?",
+        "hilfe": "Ich bin hier, um zu antworten. Was möchtest du wissen?",
+        "Hilfe": "Ich bin hier, um zu antworten. Was möchtest du wissen?",
+        "bye": "Tschüss, bis bald!",
+        "Bye": "Tschüss, bis bald!"
+    }
+    user_input = user_input.lower()
+    for key, response in responses.items():
+        if key in user_input:
+            return response
     return f"Antwort: Du hast '{user_input}' gesagt!"
 
 # Routen definieren
@@ -21,9 +33,20 @@ def render_home():
 
 @web_app.route("/get")
 def fetch_bot_response():
-    """Holt die Antwort des Chatbot Simulators auf Benutzereingaben."""
     user_input = request.args.get("msg")
-    return simple_chatbot_response(user_input)
+    if "chat_history" not in session:
+        session["chat_history"] = []
+    response = simple_chatbot_response(user_input)
+    session["chat_history"].append({"user": user_input, "bot": response})
+    session.modified = True
+    return response
+
+@web_app.route("/clear")
+def clear_history():
+    """Löscht die Chat-Historie aus der Session."""
+    session.pop("chat_history", None)  # Entfernt chat_history aus der Session
+    session.modified = True
+    return "Chat-Historie gelöscht!"
 
 if __name__ == "__main__":
     # Starte die Chatbot-Simulator

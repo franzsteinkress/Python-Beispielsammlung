@@ -37,5 +37,10 @@ Eine einfache Flask-Webanwendung mit einem rudimentären Chatbot Simulator, der 
 - Der Chatbot ist eine vereinfachte Dummy-Funktion. Für einen vollwertigen Chatbot wäre eine KI-Bibliothek (z. B. `transformers`) oder eine API erforderlich.
 - Die Anwendung läuft standardmäßig im Debug-Modus (nur für Entwicklung), was detaillierte Fehlerseiten und automatisches Neuladen bei Code-Änderungen ermöglicht. Um den Debug-Modus zu deaktivieren (z. B. für Produktion), setze `app.debug = False`.
 
+## Hinweis
+- **Screenshots**: 
+Mit der Eingabeaufforderung und diesem Befehl kann ein Screenshot des Chatbots im Browser von http://localhost:5000/ erstellt werden. Der Chatverlauf selbst bleibt dabei unsichtbar!
+`"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --screenshot=C:\Users\Franz\Desktop\screenshot1.png --window-size=1280,720 http://localhost:5000/`
+
 ## Lizenz
 Die Anwendung ist unter der [MIT-Lizenz](../LICENSE) lizenziert.

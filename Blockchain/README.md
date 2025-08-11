@@ -6,7 +6,7 @@ Die Demo stellt grundlegende Funktionen bereit, wie die Verbindung zu einer Gana
 ## Voraussetzungen
 - Python 3.13.4 oder höher
 - Ganache (lokale Ethereum-Blockchain, Version 2.7.1 oder höher)
-- Bibliotheken: `web3`, `requests`
+- Bibliotheken: `web3`, `requests`, `ttkthemes`
 - Tkinter (in Python enthalten)
 - Eine `.ico`-Datei (z. B. `fs.ico`) für das Fenstersymbol
 
@@ -33,7 +33,7 @@ Die Demo stellt grundlegende Funktionen bereit, wie die Verbindung zu einer Gana
      ```
    - Installiere die Abhängigkeiten:
      ```bash
-     pip install web3 requests
+     pip install web3 requests ttkthemes
      ```
    - Kopiere eine `.ico`-Datei (z. B. `fs.ico`) in das Projektverzeichnis.
 

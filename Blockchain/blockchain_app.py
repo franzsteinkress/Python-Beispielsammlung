@@ -6,15 +6,13 @@
 
 import tkinter as tk
 from tkinter import messagebox
-import os
+from tkinter import ttk
+from ttkthemes import ThemedTk
 from web3 import Web3
 import requests
 
 class EthereumDemo:
-    """Hauptklasse für die Ethereum-Demo-Anwendung."""
-    
     def __init__(self, haupt_fenster):
-        """Initialisiert die GUI. Verbindet zur Blockchain."""
         self.haupt_fenster = haupt_fenster
         self.haupt_fenster.title("Ethereum Blockchain Demo")
         self.haupt_fenster.iconbitmap('resources/fs.ico')
@@ -23,22 +21,16 @@ class EthereumDemo:
         self.konten = []
         
         # Fenstergröße und Zentrierung
-        breite = 600
-        hoehe = 400
-        bildschirm_breite = self.haupt_fenster.winfo_screenwidth()
-        bildschirm_hoehe = self.haupt_fenster.winfo_screenheight()
-        x = (bildschirm_breite - breite) // 2
-        y = (bildschirm_hoehe - hoehe) // 2
+        breite, hoehe = 600, 400
+        x = (self.haupt_fenster.winfo_screenwidth() - breite) // 2
+        y = (self.haupt_fenster.winfo_screenheight() - hoehe) // 2
         self.haupt_fenster.geometry(f"{breite}x{hoehe}+{x}+{y}")
         
-        # Verbinde zur Blockchain
         self.verbindungsaufbau()
-        
-        # Erstelle GUI
+        self.erstelle_styles()
         self.erstelle_oberflaeche()
     
     def verbindungsaufbau(self):
-        """Verbindet zur Ganache-Blockchain. Lädt Konten."""
         try:
             self.blockchain_verbindung = Web3(Web3.HTTPProvider(self.ganache_url))
             if not self.blockchain_verbindung.is_connected():
@@ -49,8 +41,37 @@ class EthereumDemo:
             messagebox.showerror("Fehler", f"Verbindung fehlgeschlagen: {e}")
             self.haupt_fenster.quit()
     
+    def erstelle_styles(self):
+        style = ttk.Style(self.haupt_fenster)
+
+        # Basis-Buttonfarbe
+        style.configure(
+            "Custom.TButton",
+            font=("Arial", 12),
+            background="#F2AF67",
+            foreground="black",
+            borderwidth=1
+        )
+
+        # Hover und Fokus
+        style.map(
+            "Custom.TButton",
+            background=[
+                ("active", "#E89C50"),   # Hover
+                ("focus", "#E89C50"),    # Fokus
+                ("pressed", "#D4863E")   # Klick
+            ]
+        )
+
+        # Label-Design
+        style.configure(
+            "Custom.TLabel",
+            background="#403D3A",
+            foreground="white",
+            font=("Arial", 12)
+        )
+
     def hole_kontostand(self, adresse):
-        """Holt den Kontostand einer Adresse in Ether."""
         try:
             saldo = self.blockchain_verbindung.eth.get_balance(adresse)
             return self.blockchain_verbindung.from_wei(saldo, "ether")
@@ -59,7 +80,6 @@ class EthereumDemo:
             return None
     
     def sende_transaktion(self, sender_adresse, empfaenger_adresse, betrag_ether, private_key):
-        """Sendet eine Transaktion von Sender zu Empfänger."""
         try:
             if not self.blockchain_verbindung.is_address(empfaenger_adresse):
                 raise ValueError("Ungültige Empfängeradresse.")
@@ -87,88 +107,55 @@ class EthereumDemo:
             messagebox.showerror("Fehler", f"Transaktion fehlgeschlagen: {e}")
             return None
     
-    def hole_privaten_schluessel(self, adresse):
-        """Holt den privaten Schlüssel für eine Adresse von Ganache."""
-        try:
-            response = requests.post(self.ganache_url, json={
-                "method": "eth_getAccountPrivateKey",
-                "params": [adresse],
-                "id": 1,
-                "jsonrpc": "2.0"
-            })
-            print(response.text)
-            result = response.json()
-            if "result" in result:
-                return result["result"]
-            raise Exception("Privater Schlüssel nicht gefunden.")
-        except Exception as e:
-            raise Exception(f"Fehler beim Abrufen des privaten Schlüssels: {e}")
-    
     def erstelle_oberflaeche(self):
-        """Erstellt die Tkinter-Bedienoberfläche."""
-        haupt_frame = tk.Frame(self.haupt_fenster, padx=10, pady=10)
+        haupt_frame = tk.Frame(self.haupt_fenster, padx=10, pady=10, bg="#403D3A")
         haupt_frame.grid(row=0, column=0, sticky="nsew")
         self.haupt_fenster.grid_rowconfigure(0, weight=1)
         self.haupt_fenster.grid_columnconfigure(0, weight=1)
-        haupt_frame.configure(bg="#403D3A")
 
-        # Kontoauswahl
-        tk.Label(haupt_frame, text="Sender-Konto:", bg="#403D3A", fg="white", font="Arial 12").grid(row=0, column=0, sticky="e", pady=5)
+        # Sender-Konto
+        ttk.Label(haupt_frame, text="Sender-Konto:", style="Custom.TLabel").grid(row=0, column=0, sticky="e", pady=5)
         self.konto_auswahl = tk.StringVar(self.haupt_fenster)
         if self.konten:
             self.konto_auswahl.set(self.konten[0])
-        tk.OptionMenu(haupt_frame, self.konto_auswahl, *self.konten).grid(row=0, column=1, sticky="w", pady=5)
-        
+        ttk.OptionMenu(haupt_frame, self.konto_auswahl, self.konten[0], *self.konten).grid(row=0, column=1, sticky="w", pady=5)
+
         # Kontostand abrufen
-        tk.Button(
-            haupt_frame,
-            text="Kontostand abrufen",
-            command=self.zeige_kontostand,
-            bg="#F2AF67",
-            font="Arial 12"
-        ).grid(row=1, column=1, sticky="w", pady=10)
+        ttk.Button(haupt_frame, text="Kontostand abrufen", style="Custom.TButton", command=self.zeige_kontostand).grid(row=1, column=1, sticky="w", pady=10)
         
-        # Kontostand-Anzeige
-        self.kontostand_label = tk.Label(haupt_frame, text="Kontostand: -", bg="#403D3A", fg="white", font="Arial 12 bold")
+        ttk.Label(haupt_frame, text="Kontostand:", style="Custom.TLabel", font=("Arial", 12, "bold")).grid(row=2, column=0, sticky="e", pady=5)
+        self.kontostand_label = ttk.Label(haupt_frame, style="Custom.TLabel")
         self.kontostand_label.grid(row=2, column=1, sticky="w", pady=10)
-        
+
         # Empfängeradresse
-        tk.Label(haupt_frame, text="Empfängeradresse:", bg="#403D3A", fg="white", font="Arial 12").grid(row=3, column=0, sticky="e", pady=5)
-        self.empfaenger_eingabe = tk.Entry(haupt_frame, font="Arial 12", width=45)
+        ttk.Label(haupt_frame, text="Empfängeradresse:", style="Custom.TLabel").grid(row=3, column=0, sticky="e", pady=5)
+        self.empfaenger_eingabe = ttk.Entry(haupt_frame, width=60)
         self.empfaenger_eingabe.grid(row=3, column=1, sticky="w", pady=5)
         
         # Betrag
-        tk.Label(haupt_frame, text="Betrag (Ether):", bg="#403D3A", fg="white", font="Arial 12").grid(row=4, column=0, sticky="e", pady=5)
-        self.betrag_eingabe = tk.Entry(haupt_frame, font="Arial 12")
+        ttk.Label(haupt_frame, text="Betrag (Ether):", style="Custom.TLabel").grid(row=4, column=0, sticky="e", pady=5)
+        self.betrag_eingabe = ttk.Entry(haupt_frame)
         self.betrag_eingabe.grid(row=4, column=1, sticky="w", pady=5)
         
         # Privater Schlüssel
-        tk.Label(haupt_frame, text="Privater Schlüssel:", bg="#403D3A", fg="white", font="Arial 12").grid(row=5, column=0, sticky="e", pady=5)
-        self.private_key_eingabe = tk.Entry(haupt_frame, font="Arial 12", show="*", width=45)
+        ttk.Label(haupt_frame, text="Privater Schlüssel:", style="Custom.TLabel").grid(row=5, column=0, sticky="e", pady=5)
+        self.private_key_eingabe = ttk.Entry(haupt_frame, show="*", width=60)
         self.private_key_eingabe.grid(row=5, column=1, sticky="w", pady=5)
         
         # Transaktion senden
-        tk.Button(
-            haupt_frame,
-            text="Transaktion senden",
-            command=self.sende_transaktion_gui,
-            bg="#F2AF67",
-            font="Arial 12"
-        ).grid(row=6, column=1, sticky="w", pady=10)
-        
-        # Transaktionsergebnis
-        self.transaktions_label = tk.Label(haupt_frame, text="Transaktionsstatus: -", bg="#403D3A", fg="white", font="Arial 12 bold", wraplength=0)
+        ttk.Button(haupt_frame, text="Transaktion senden", style="Custom.TButton", command=self.sende_transaktion_gui).grid(row=6, column=1, sticky="w", pady=10)
+
+        ttk.Label(haupt_frame, text="Transaktionsstatus:", style="Custom.TLabel", font=("Arial", 12)).grid(row=7, column=0, sticky="w", pady=10)
+        self.transaktions_label = ttk.Label(haupt_frame, style="Custom.TLabel", font=("Arial", 10))
         self.transaktions_label.grid(row=7, column=1, sticky="w", pady=10)
     
     def zeige_kontostand(self):
-        """Zeigt den Kontostand des ausgewählten Kontos an."""
         adresse = self.konto_auswahl.get()
         saldo = self.hole_kontostand(adresse)
         if saldo is not None:
-            self.kontostand_label.config(text=f"Kontostand: {saldo:.4f} ETH")
+            self.kontostand_label.config(text=f"{saldo:.4f} ETH")
     
     def sende_transaktion_gui(self):
-        """Sendet eine Transaktion basierend auf Benutzereingaben."""
         sender_adresse = self.konto_auswahl.get()
         empfaenger_adresse = self.empfaenger_eingabe.get()
         private_key = self.private_key_eingabe.get()
@@ -177,18 +164,17 @@ class EthereumDemo:
             if betrag_ether <= 0:
                 raise ValueError("Betrag muss positiv sein.")
             if not all([empfaenger_adresse, self.betrag_eingabe.get(), private_key]):
-                raise ValueError("Alle Felder (Empfängeradresse, Betrag, privater Schlüssel) müssen ausgefüllt sein!")
+                raise ValueError("Alle Felder müssen ausgefüllt sein!")
             tx_hash = self.sende_transaktion(sender_adresse, empfaenger_adresse, betrag_ether, private_key)
             if tx_hash:
-                self.transaktions_label.config(text=f"Transaktionsstatus: Erfolgreich (Hash: {tx_hash})")
+                self.transaktions_label.config(text=f"{tx_hash}")
         except ValueError as e:
             messagebox.showerror("Fehler", f"Ungültige Eingabe: {e}")
         except Exception as e:
             messagebox.showerror("Fehler", f"Transaktion fehlgeschlagen: {e}")
 
 def main():
-    """Hauptfunktion. Startet die Tkinter-Anwendung."""
-    haupt_fenster = tk.Tk()
+    haupt_fenster = ThemedTk(theme="radiance")  # Nur Windows
     app = EthereumDemo(haupt_fenster)
     haupt_fenster.mainloop()
 
