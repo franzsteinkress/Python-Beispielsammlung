@@ -1,111 +1,26 @@
-# Python-Beispielsammlung
+# Python-Beispielsammlung – Python-Apps & Webdesign – 8 Projekte, 10 einzigartige Layouts
 
-![Python](https://img.shields.io/badge/Python-3.13-blue) ![VS Code](https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white) ![Tkinter](https://img.shields.io/badge/Tkinter-GUI-ff6f00) ![Flask](https://img.shields.io/badge/Flask-2.3-black?logo=flask&logoColor=white) ![OpenCV](https://img.shields.io/badge/OpenCV-4.10-green?logo=opencv&logoColor=white) ![Cryptography](https://img.shields.io/badge/Cryptography-Security-yellow) ![web3.py](https://img.shields.io/badge/web3.py-Blockchain-orange) ![VS Code](https://img.shields.io/badge/Editor-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green)
 
-Dies ist eine Sammlung von **12 eigenständigen Python-Projekten**, jeweils in einem eigenen Unterordner organisiert. Die Projekte decken verschiedene Themen ab – von GUI-Anwendungen mit Tkinter bis hin zu Web-APIs mit Flask und Blockchain-Demos mit Web3.
+Diese Sammlung bietet praxisnahe Beispiele für **Python GUI Entwicklung** mit **Tkinter** und **Bootstrap Layouts** – von klassischen Desktop-Apps bis zu modernen Weboberflächen mit **CSS Themes** und flexiblen Layout-Managern. Ziel ist eine konsistente, wartbare UI-Basis für wiederverwendbare **Python Anwendungen**.
 
----
+- 🔗 **[Live-Demo Viewer](https://franzsteinkress.github.io/Python-Beispielsammlung/Vorschau/html-visuals/index.html)**
+- 🔗 **[Blogpost (DE/EN)](https://steinkress.com/blog.html#post9)**
+- 🔗 **[GitHub Repository](https://github.com/franzsteinkress/Python-Beispielsammlung)**
 
-## Projekte im Überblick
+## 8 Python-Anwendungen im Überblick
 
-### [1. Bestätigungsdialog](./Bestaetigungsdialog)
-Eine einfache Tkinter-Anwendung mit Hauptfenster und Button, der einen nicht-modalen Bestätigungsdialog („Ja“ / „Nein“) öffnet.
-
-![Bestätigungsdialog](.screenshots/bestaetigungsdialog.png)
-
----
-
-### [2. Bildverarbeitung](./Bildverarbeitung)
-Tkinter-basierte Anwendung zur Bildverarbeitung mit OpenCV – u. a. Graustufen, Kantenfilter, Unschärfe.
-
-![Bildverarbeitung](.screenshots/bildverarbeitung.png)
-
----
-
-### [3. Blockchain](./Blockchain)
-Tkinter-Frontend zur Interaktion mit einer lokalen Ganache-Blockchain.  
-Funktionen: Verbindung herstellen, Kontostände anzeigen, Transaktionen senden.
-
-![Blockchain](.screenshots/blockchain.png)
-
----
-
-### [4. Blog](./Blog)
-Flask-Webanwendung mit SQLite zur Verwaltung von Blog-Posts (Erstellen, Bearbeiten, Löschen, Anzeigen).
-
-![Blog-Anwendung](.screenshots/blog.png)
-
----
-
-### [5. Chatbot](./Chatbot)
-Einfache Flask-Webanwendung mit einem rudimentären, regelbasierten Chatbot Simulator.
-
-![Chatbot](.screenshots/chatbot.png)
-
----
-
-### [6. Eingabedialog](./Eingabedialog)
-Tkinter-Anwendung mit Eingabefeld. Der eingegebene Text wird im Hauptfenster angezeigt.
-
-![Eingabedialog](.screenshots/eingabedialog.png)
-
----
-
-### [7. Finanzdatenanzeige](./Finanzdatenanzeige)
-Tkinter-Tool zur Anzeige von Bankdaten im CSV-Format in Tabellenform.
-
-![Finanzdatenanzeige](.screenshots/finanzdatenanzeige.png)
-
----
-
-### [8. Funktionsdialog](./Funktionsdialog)
-Tkinter-Anwendung mit Texteditor und Menü für verschiedene Werkzeuge:
-- Uhr (digital)
-- Fortschrittsbalken
-- System-Kalkulator
-- Bildbetrachter (JPEG, PNG)
-- Systeminformationen
-- Übersetzer-Demo (Platzhalter)
-
-![Funktionsdialog](.screenshots/funktionsdialog.png)
-
----
-
-### [9. Funktionswerkzeug](./Funktionswerkzeug)
-Tkinter-Anwendung mit mehreren Werkzeugen:
-- Akronym-Generator  
-- BMI-Rechner  
-- Farbiger Text  
-- Würfel-Simulator  
-- Temperaturkonverter (Fahrenheit ↔ Celsius)  
-- Passwort-Generator  
-- QR-Code-Generator  
-- Römische-Zahlen-Konverter
-
-![Funktionswerkzeug](.screenshots/funktionswerkzeug.png)
-
----
-
-### [10. Lizenzpruefer](./Lizenzpruefer)
-Python-Tool zur Lizenzprüfung auf Basis von RSA-signierten Lizenzdateien.
-
-![Lizenzpruefer](.screenshots/lizenzpruefer.png)
-
----
-
-### [11. Notizenverwaltung](./Notizenverwaltung)
-Flask-basierte REST-API mit SQLite und Weboberfläche zur Notizverwaltung.
-
-![Notizenverwaltung](.screenshots/notizenverwaltung.png)
-
----
-
-### [12. Verschluesselung](./Verschluesselung)
-Python-Tool zur symmetrischen AES-Verschlüsselung mit der `cryptography`-Bibliothek.
-
-![Verschluesselung](.screenshots/verschluesselung.png)
-
----
+Diese Sammlung umfasst acht praxisorientierte Python-Anwendungen – von Tkinter-GUIs mit der Standardbibliothek bis zu browserbasierten Projekten mit CSS & Bootstrap. Jede Anwendung demonstriert ein eigenes Layout, Theme und Bedienkonzept.
+| Thema | Beschreibung | Theme | Layout-Manager |
+| --- | --- | --- | --- |
+| Bildverarbeitung | Bildverarbeitung mit OpenCV | ttktheme "plastik" (leicht futuristisch) | pack() |
+| Blockchain | Blockchain-Demo mit Web3 | ttktheme "radiance" (Ubuntu-Stil) | grid() |
+| Finanzdatenanzeige | Bankdaten im CSV-Format | ttktheme "alt" | grid() |
+| Lizenzpruefer | RSA-signierte Lizenzdateien | ttktheme "classic" | grid() |
+| Verschluesselung | AES-Verschlüsselung mit cryptography-Bibliothek | Klassische tk-Widgets ohne Theme | grid() |
+| Blog | Webanwendung mit Flask und SQLite-Datenbank | Bootstrap 5.3.0 Standard mit Anpassungen | kein |
+| Chatbot | Webanwendung mit Flask | Eigenes minimalistisches CSS | kein |
+| Notizenverwaltung | Webanwendung mit Flask und SQLite-Datenbank (REST-API) | Bootstrap 5.3.0 Standard mit Anpassungen | kein |
 
 ## Verwendete Bibliotheken
 
@@ -117,8 +32,13 @@ Python-Tool zur symmetrischen AES-Verschlüsselung mit der `cryptography`-Biblio
 - **Colorama**, **pyqrcode**, **pypng**
 - **Cryptography**
 
----
+## Hinweise
+
+- **Tkinter Design** und **Bootstrap Layouts** in einem Set – schnell anpassbar per **CSS Theme**.  
+- Beispiele sind minimal gehalten, dokumentiert und dienen als Startpunkt für eigene Projekte.
+- Jede einzelne Python-Anwendung hat eine eigene Readme-Datei.
 
 ## Lizenz
 
-Dieses Repository steht unter der [MIT-Lizenz](./LICENSE). Es ist zu Lernzwecken erstellt. Inhalte und Code dürfen frei verwendet und angepasst werden.
+Dieses Repository steht unter der [MIT-Lizenz](./LICENSE).
+
