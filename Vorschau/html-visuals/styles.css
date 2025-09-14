@@ -12,7 +12,11 @@ html, body {
 .container {
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 50%;
+    margin: 0 auto;
+    transform: translateX(-50%);
+    max-width: 90%;
+    width: 300px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -36,15 +40,27 @@ html, body {
     color: #f5f5f5;
 }
 
+@media (max-width: 767px) {
+    .container {
+        top: 0;
+        width: 200px;
+        max-width: 100%;
+        border-radius: 0;     /* auf Mobile randlos */
+    }
+    .container h1 {
+        font-size: 0.875rem;
+    }
+}
+
 .overlay-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     aspect-ratio: 9 / 16;
-    height: 90vh;
-    width: 56.25vh; /* 16:9 Breite zu 100% Höhe */
+    height: auto;
     max-height: 90vh;
+    width: 56.25vh; /* 16:9 Breite zu 100% Höhe */
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px;
     border: 2px solid white;
@@ -58,6 +74,19 @@ html, body {
     color: white;
     text-align: center;
     overflow: visible;
+    z-index: 1;
+}
+/* Mobile: volle Breite */
+@media (max-width: 767px) {
+    .overlay-box {
+        height: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+        width: 100vw;
+        min-height: 100vh;
+        max-width: 100%;
+        border-radius: 0;  /* auf Mobile randlos */
+    }
 }
 
 .overlay-box main {
@@ -66,7 +95,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5vh;
+    gap: 1.5%;
     width: 100%;
     overflow: auto;
 }
@@ -84,6 +113,11 @@ html, body {
     flex-direction: column;
     align-items: center;
 }
+@media (max-width: 767px) {
+    .text {
+        margin-top: 90px;
+    }
+}
 
 .text .line1 {
     font-size: 2.4vh;
@@ -95,13 +129,16 @@ html, body {
     font-size: 2vh;
 }
 
+.text .line3 {
+    font-size: 2vh;
+}
+
 .overlay-box img {
     width: 100%; /* Bild füllt die Breite der overlay-box */
     height: auto;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    /* border-radius: 12px; */
 }
 
 button {
@@ -115,7 +152,7 @@ button {
 }
 
 #closeBtn {
-    margin-bottom: 90px;
+    margin-bottom: 50px;
     background-color: white;
     color: #333;
     border: none;
@@ -162,3 +199,17 @@ button {
 .arrow.left  { left: -3.0rem;  margin-left: -3.5rem; top: 50%; transform: translateY(-50%) scale(1); }
 .arrow.right { right: -3.0rem; margin-right: -3.5rem; top: 50%; transform: translateY(-50%) scale(1); }
 .arrow:hover { transform: translateY(-50%) scale(1.2); }
+
+/* Mobile: Buttons unsichtbar */
+#leftBtn,
+#rightBtn {
+    display: none;
+}
+
+/* Desktop: Buttons sichtbar */
+@media (min-width: 768px) {
+    #leftBtn,
+    #rightBtn {
+        display: flex; /* weil du oben flex brauchst */
+    }
+}

@@ -5,6 +5,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI-Design Vorschau</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -99,10 +100,10 @@
 
         let imageIndex = 0;
         const img = document.querySelector(".overlay-box img");
-        const button = document.getElementById("closeBtn");
         const titl = document.getElementById("title");
         const desc = document.getElementById("description");
         const note = document.getElementById("note");
+        const button = document.getElementById("closeBtn");
         const overlayBox = document.getElementById("overlayBox");
         const lBtn = document.getElementById("leftBtn");
         const rBtn = document.getElementById("rightBtn");
@@ -116,11 +117,11 @@
             overlayBox.style.backgroundColor = dominantColors[imageIndex];
             overlayBox.style.color = fontColors[imageIndex];
             overlayBox.style.outline = dominantColors[imageIndex];
-            lBtn.style.backgroundColor =  dominantColors[imageIndex];
-            lBtn.style.color =  fontColors[imageIndex];
+            lBtn.style.backgroundColor = dominantColors[imageIndex];
+            lBtn.style.color = fontColors[imageIndex];
             lBtn.style.outline = dominantColors[imageIndex];
-            rBtn.style.backgroundColor =  dominantColors[imageIndex];
-            rBtn.style.color =  fontColors[imageIndex];
+            rBtn.style.backgroundColor = dominantColors[imageIndex];
+            rBtn.style.color = fontColors[imageIndex];
             rBtn.style.outline = dominantColors[imageIndex];
         }
 
